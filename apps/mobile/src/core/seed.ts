@@ -1,5 +1,36 @@
 import { Palette } from '@/constants/theme';
-import type { Achievement, CompanionTurn, Entry, FeedItem, MemoryItem, Page } from '@/core/types';
+import type { Achievement, CompanionTurn, Entry, FeedItem, MemoryItem, Page, PhotoAttachment } from '@/core/types';
+
+export const DEMO_ATTACHMENTS: PhotoAttachment[] = [
+  {
+    id: 'photo-venue',
+    label: 'Venue table',
+    caption: 'Long table, cables everywhere',
+    icon: 'plug',
+    swatch: 'sand',
+  },
+  {
+    id: 'photo-whiteboard',
+    label: 'Whiteboard',
+    caption: 'The idea finally clicked',
+    icon: 'bulb',
+    swatch: 'sky',
+  },
+  {
+    id: 'photo-build',
+    label: 'First screen',
+    caption: 'The moment the animation landed',
+    icon: 'rocket',
+    swatch: 'blue',
+  },
+  {
+    id: 'photo-late',
+    label: 'Pitch night',
+    caption: 'Late room before demo day',
+    icon: 'moon',
+    swatch: 'mist',
+  },
+];
 
 /** The page produced live during the demo (the hackathon "build day"). */
 export const DEMO_PAGE: Page = {
@@ -57,6 +88,7 @@ export const SEED_ENTRIES: Entry[] = [
     dateISO: '2026-06-12T09:30:00.000Z',
     transcript: 'Just got to the venue, grabbed my badge and found a seat near an outlet.',
     page: arrivePage,
+    attachments: DEMO_ATTACHMENTS.slice(0, 2),
     privacy: 'private',
   },
   {
@@ -64,6 +96,7 @@ export const SEED_ENTRIES: Entry[] = [
     dateISO: '2026-06-12T13:00:00.000Z',
     transcript: 'We argued about the idea for ages but finally picked one everyone is excited about.',
     page: ideaPage,
+    attachments: DEMO_ATTACHMENTS.slice(1, 3),
     privacy: 'public',
   },
 ];

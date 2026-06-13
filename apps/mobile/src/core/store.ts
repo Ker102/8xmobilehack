@@ -3,6 +3,7 @@ import { create } from 'zustand';
 import { generatePage } from '@/core/agent';
 import {
   COMPANION_SCRIPT,
+  DEMO_ATTACHMENTS,
   DEMO_TRANSCRIPT,
   INITIAL_GAMIFICATION,
   SEED_ACHIEVEMENTS,
@@ -17,6 +18,7 @@ import type {
   Entry,
   FeedItem,
   MemoryItem,
+  PhotoAttachment,
 } from '@/core/types';
 
 let idCounter = 0;
@@ -32,6 +34,7 @@ type OttoState = {
   gamification: Gamification;
 
   draftTranscript: string;
+  draftAttachments: PhotoAttachment[];
   lastCreatedEntryId: string | null;
   personalizations: string[];
 
@@ -42,6 +45,8 @@ type OttoState = {
   setOnboarded: (v: boolean) => void;
 
   setDraft: (text: string) => void;
+  attachDemoPhotos: () => void;
+  addAttachmentToEntry: (id: string) => void;
   commitEntry: () => Entry;
   shareEntry: (id: string) => void;
   getEntry: (id: string) => Entry | undefined;
@@ -59,6 +64,7 @@ export const useOtto = create<OttoState>((set, get) => ({
   gamification: { ...INITIAL_GAMIFICATION },
 
   draftTranscript: '',
+  draftAttachments: DEMO_ATTACHMENTS,
   lastCreatedEntryId: null,
   personalizations: [],
 
@@ -75,14 +81,26 @@ export const useOtto = create<OttoState>((set, get) => ({
   setOnboarded: (v) => set({ onboarded: v }),
 
   setDraft: (text) => set({ draftTranscript: text }),
+  attachDemoPhotos: () => set({ draftAttachments: DEMO_ATTACHMENTS }),
+  addAttachmentToEntry: (id) =>
+    set((s) => ({
+      entries: s.entries.map((e) => {
+        if (e.id !== id) return e;
+        const existing = new Set(e.attachments.map((a) => a.id));
+        const next = DEMO_ATTACHMENTS.find((a) => !existing.has(a.id));
+        return next ? { ...e, attachments: [...e.attachments, next] } : e;
+      }),
+    })),
 
   commitEntry: () => {
     const transcript = get().draftTranscript.trim() || DEMO_TRANSCRIPT;
+    const attachments = get().draftAttachments.length ? get().draftAttachments : DEMO_ATTACHMENTS;
     const entry: Entry = {
       id: uid('entry'),
       dateISO: new Date().toISOString(),
       transcript,
       page: generatePage(transcript),
+      attachments,
       privacy: 'private',
     };
     set((s) => ({

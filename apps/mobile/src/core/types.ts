@@ -31,6 +31,14 @@ export type Page = {
   mood: MoodId;
 };
 
+export type PhotoAttachment = {
+  id: string;
+  label: string;
+  caption: string;
+  icon: IconName;
+  swatch: SwatchName;
+};
+
 export type Privacy = 'private' | 'public';
 
 export type Entry = {
@@ -38,6 +46,7 @@ export type Entry = {
   dateISO: string;
   transcript: string;
   page: Page;
+  attachments: PhotoAttachment[];
   privacy: Privacy;
 };
 

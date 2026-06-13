@@ -3,10 +3,11 @@ import { useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 
+import { AttachmentStrip } from '@/components/AttachmentStrip';
 import { Otto } from '@/components/Otto';
 import { PageView } from '@/components/PageView';
 import { Colors, Radius, Spacing } from '@/constants/theme';
-import { DEMO_PAGE } from '@/core/seed';
+import { DEMO_ATTACHMENTS, DEMO_PAGE } from '@/core/seed';
 import { useOtto } from '@/core/store';
 import { MOODS } from '@/core/types';
 import { AppText, Button, Icon, Screen } from '@/design';
@@ -21,11 +22,13 @@ const REACTIONS: Record<string, string> = {
 export default function RevealScreen() {
   const router = useRouter();
   const lastId = useOtto((s) => s.lastCreatedEntryId);
-  const getEntry = useOtto((s) => s.getEntry);
+  const entries = useOtto((s) => s.entries);
+  const addAttachmentToEntry = useOtto((s) => s.addAttachmentToEntry);
   const shareEntry = useOtto((s) => s.shareEntry);
 
-  const entry = lastId ? getEntry(lastId) : undefined;
+  const entry = lastId ? entries.find((e) => e.id === lastId) : undefined;
   const page = entry?.page ?? DEMO_PAGE;
+  const attachments = entry?.attachments ?? DEMO_ATTACHMENTS;
   const [replayKey, setReplayKey] = useState(0);
   const [playing, setPlaying] = useState(false);
 
@@ -51,6 +54,13 @@ export default function RevealScreen() {
         </AppText>
         <View style={[styles.playDot, { backgroundColor: MOODS[page.mood].color }]} />
       </Pressable>
+
+      <AttachmentStrip
+        attachments={attachments}
+        title="Photos Otto used"
+        actionLabel="Add more"
+        onAdd={entry ? () => addAttachmentToEntry(entry.id) : undefined}
+      />
 
       <View key={replayKey} style={styles.page}>
         <PageView page={page} animate />
@@ -81,10 +91,10 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.one + 3,
     borderRadius: Radius.pill,
     backgroundColor: Colors.light.accentTint,
-    marginBottom: Spacing.five,
+    marginBottom: Spacing.three,
   },
   playDot: { width: 7, height: 7, borderRadius: 4 },
-  page: { marginBottom: Spacing.five },
+  page: { marginTop: Spacing.five, marginBottom: Spacing.five },
   actions: { gap: Spacing.two + 2 },
   replay: { flexDirection: 'row', alignItems: 'center', gap: 6, alignSelf: 'center', paddingVertical: Spacing.two },
 });

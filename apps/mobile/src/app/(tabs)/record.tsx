@@ -10,6 +10,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
+import { AttachmentStrip } from '@/components/AttachmentStrip';
 import { Colors, Radius, Shadow, Spacing } from '@/constants/theme';
 import { useOtto } from '@/core/store';
 import { AppText, Button, Icon, Screen } from '@/design';
@@ -24,6 +25,8 @@ const PROMPTS = [
 export default function RecordScreen() {
   const router = useRouter();
   const setDraft = useOtto((s) => s.setDraft);
+  const attachments = useOtto((s) => s.draftAttachments);
+  const attachDemoPhotos = useOtto((s) => s.attachDemoPhotos);
 
   const [typing, setTyping] = useState(false);
   const [text, setText] = useState('');
@@ -66,6 +69,13 @@ export default function RecordScreen() {
             {typing ? 'Type your day' : PROMPTS[promptIndex]}
           </AppText>
         </Animated.View>
+
+        <AttachmentStrip
+          attachments={attachments}
+          title="Attached for this page"
+          actionLabel="Add photos"
+          onAdd={attachDemoPhotos}
+        />
 
         {typing ? (
           <View style={styles.typeBox}>
@@ -175,7 +185,7 @@ function formatTime(total: number) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: Spacing.five },
+  container: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: Spacing.four },
   recordArea: { alignItems: 'center', gap: Spacing.four },
   recordButtonWrap: { alignItems: 'center', justifyContent: 'center' },
   pulseRing: { position: 'absolute', width: 132, height: 132, borderRadius: 66, backgroundColor: Colors.light.accent },

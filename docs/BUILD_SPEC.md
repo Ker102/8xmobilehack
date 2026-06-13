@@ -46,14 +46,14 @@ Default tab on launch: **Shelf** for returning users, **Record** for brand-new u
 
 ## 3. Record (the core loop)
 
-### 3.1 Idle — large central record button; rotating prompt above ("How was today?"); "type instead" below.
+### 3.1 Idle — large central record button; rotating prompt above ("How was today?"); optional photo attachments above/beside the voice entry; "type instead" below.
 ### 3.2 Recording — animated button + live waveform + elapsed time; tap to stop.
 ### 3.3 Generating — companion-themed "developing" beat; calm rotating status lines ("listening…", "sketching your day…", "adding colour…"); never a raw spinner. On failure, keep the transcript and offer gentle retry.
-### 3.4 Reveal — finished page plays (illustration + narration + captions); Otto reacts with a mood; controls: **replay**, **Save (private)** [primary], **Share** [secondary], edit-mood.
+### 3.4 Reveal — finished page plays (illustration + narration + captions); Otto reacts with a mood; show the photos Otto used and allow adding more context after generation; controls: **replay**, **Save (private)** [primary], **Share** [secondary], edit-mood.
 ### 3.5 Typed path — same loop with a text box; the reliable demo path.
 
 **[HACKATHON]** Text path is the reliable demo path; pre-cache one page as stage fallback.
-**[IN DEMO]** Both an animated record button (waveform + timer) and the typed path feed a scripted agent trace: Otto thinks while tool calls stream in (`transcribe → read_mood → recall_memory → draft_structure → illustrate → compose_narration`). The trace resolves to the pre-authored page and reveals it with Otto's mood reaction, a narration play affordance, Save→Shelf and Share→Feed.
+**[IN DEMO]** Both an animated record button (waveform + timer) and the typed path show four pre-attached demo photos before generation. They feed a scripted agent trace: Otto thinks while tool calls stream in (`transcribe → read_mood → inspect_photos → recall_memory → draft_structure → illustrate → compose_narration`). The trace resolves to the pre-authored page and reveals it with Otto's mood reaction, the photos Otto used, a narration play affordance, Save→Shelf and Share→Feed.
 
 ---
 

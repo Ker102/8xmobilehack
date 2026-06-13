@@ -38,6 +38,14 @@ export const AGENT_TRACE: AgentEvent[] = [
     result: 'joyful · high energy',
     durationMs: 950,
   },
+  {
+    kind: 'tool',
+    tool: 'inspect_photos',
+    icon: 'image',
+    args: '4 reference photos',
+    result: 'venue · whiteboard · build · pitch night',
+    durationMs: 1050,
+  },
   { kind: 'thought', text: 'This connects to what they told me before.', durationMs: 1000 },
   {
     kind: 'tool',
