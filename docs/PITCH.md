@@ -31,6 +31,18 @@ Every page is private by default. The wild, funny, dramatic ones — the stuff y
 - **Feed:** the pages people *choose* to make public, ranked for the scroll. This is the upside.
 - **Companion:** Otto co-regulates and remembers — the relationship that makes journaling stick.
 
+## Why Otto remembers
+
+Memory is not there to make Otto feel like a chatbot with trivia about you. It exists to make journaling easier, more personal, and more continuous over time:
+
+- **Better follow-up questions:** Otto can ask "How did the pitch go?" instead of "How was your day?"
+- **Better pages:** the agent can reuse recurring people, places, projects, tone, symbols, and avatar details so entries feel like chapters in the same life, not isolated AI outputs.
+- **Better reflection:** Otto can surface patterns across weeks — stress before demos, calm after walks, energy after building with friends — without making the product feel clinical.
+- **Better recaps:** weekly/monthly summaries become personal because Otto knows what mattered, not just what was said most recently.
+- **Better relationship:** visible, editable memory turns Otto from a formatting tool into a companion that meets you where you are.
+
+The product principle: **Otto remembers just enough context to turn journaling from a blank page into an ongoing conversation.** Memory must stay visible, editable, and deletable so the user stays in control.
+
 ## Why this defends itself
 
 **It's not a video — it's an animated page.** Still illustration with gentle motion: cheaper, faster, more consistent, and more visually distinctive than AI video. That's not a limitation — it's exactly what a high-volume feed needs to be economically viable and recognisable.

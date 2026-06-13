@@ -40,7 +40,7 @@ Default tab on launch: **Shelf** for returning users, **Record** for brand-new u
 5. **Account/save** — only *after* the first page is revealed.
 
 **[HACKATHON]** Keep 2 + 4 + the reveal. Hardcode the avatar. Skip accounts (local only).
-**[IN DEMO]** Cut for now; the app opens on a living Shelf and the Record→Reveal magic is one tap away.
+**[IN DEMO]** Three-step onboarding-lite: **Welcome → Meet Otto → How it works**, with Skip and Start journaling actions. A fresh load opens here so the demo has a clean cold open before Record.
 
 ---
 
@@ -53,7 +53,7 @@ Default tab on launch: **Shelf** for returning users, **Record** for brand-new u
 ### 3.5 Typed path — same loop with a text box; the reliable demo path.
 
 **[HACKATHON]** Text path is the reliable demo path; pre-cache one page as stage fallback.
-**[IN DEMO]** Both an animated record button (waveform + timer) and the typed path feed a scripted 5-step Generating sequence (Otto animating), which resolves to the pre-authored page and reveals it with Otto's mood reaction, a narration play affordance, Save→Shelf and Share→Feed.
+**[IN DEMO]** Both an animated record button (waveform + timer) and the typed path feed a scripted agent trace: Otto thinks while tool calls stream in (`transcribe → read_mood → recall_memory → draft_structure → illustrate → compose_narration`). The trace resolves to the pre-authored page and reveals it with Otto's mood reaction, a narration play affordance, Save→Shelf and Share→Feed.
 
 ---
 
@@ -62,7 +62,7 @@ Default tab on launch: **Shelf** for returning users, **Record** for brand-new u
 Reverse-chronological pages; each shows date, thumbnail, mood, private/shared badge. Tap → full page replay. Gentle streak indicator; "On this day"; search/filter (v1). Warm empty state.
 
 **[HACKATHON]** Pre-seed 2–3 pages; cut search/streaks/"on this day".
-**[IN DEMO]** Pre-seeded hackathon entries with gradient thumbnails, mood + privacy chips, a gentle streak chip; tap opens the full page in a modal with the original transcript and a share action.
+**[IN DEMO]** Pre-seeded hackathon entries with solid illustrated thumbnails, mood + privacy chips, and a gentle streak chip; tap opens the full page in a modal with the original transcript and a share action.
 
 ---
 
@@ -80,7 +80,17 @@ Vertical full-screen scroll of **public** pages; autoplay with captions; engagem
 Its own screen; reacts to recent entries. **Mood reactions:** good day → lights up, warm note; hard day → quiet, gentle, sits closer, never "cheer up"; silence → present, patient, **no guilt/streak-shaming**; milestone → small genuine celebration. **Prompts:** gentle, specific follow-ups from past entries, feeding the Record prompt. **Memory:** references earlier entries (continuity = key differentiator). **Guardrails:** warm, sparing, soulful, never therapy-speak, never breaks character.
 
 **[HACKATHON]** Mascot + 2–3 scripted mood reactions; fake memory with a hardcoded callback; cut generated prompts.
-**[IN DEMO]** Animated octopus with mood states; a scripted chat where each answer **visibly writes to per-user memory** and can **personalize today's page** — the memory backbone made tangible for judges.
+**[IN DEMO]** Animated octopus with mood states; a scripted chat where each answer **visibly writes to per-user memory** and can **personalize today's page**. The Generating trace also highlights `recall_memory`, making the memory backbone tangible for judges.
+
+### 6.1 Why memory exists
+
+Otto memory is not a gimmick or a generic chatbot feature. It powers the core product loop:
+
+- **Relevant prompts:** ask specific follow-ups later ("How did the pitch go?") instead of generic journaling questions.
+- **Continuity:** carry recurring people, places, projects, tone, symbols, and avatar details into future pages.
+- **Better generated journals:** give the formatting/illustration agent enough context to make each page feel like part of the same user's life.
+- **Reflection over time:** identify gentle patterns across entries and produce personal weekly/monthly recaps.
+- **Companion trust:** make Otto feel present and consistent while keeping memory visible, editable, and deletable.
 
 ---
 
