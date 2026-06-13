@@ -39,6 +39,15 @@ export type PhotoAttachment = {
   swatch: SwatchName;
 };
 
+export type AvatarChoices = {
+  presetId: string;
+  skinTone: string;
+  hairStyle: string;
+  hairColor: string;
+  detail: string;
+  accessory: string;
+};
+
 export type Privacy = 'private' | 'public';
 
 export type Entry = {

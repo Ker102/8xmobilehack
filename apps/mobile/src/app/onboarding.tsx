@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import Animated, { FadeIn, FadeInDown } from 'react-native-reanimated';
 
+import { AvatarBuilder } from '@/components/AvatarBuilder';
 import { Otto } from '@/components/Otto';
 import { Colors, Radius, Shadow, Spacing } from '@/constants/theme';
 import { useOtto } from '@/core/store';
@@ -51,12 +52,18 @@ const STEPS: Step[] = [
   },
 ];
 
+const AVATAR_STEP = 1;
+const TOTAL_STEPS = STEPS.length + 1;
+
 export default function Onboarding() {
   const router = useRouter();
   const setOnboarded = useOtto((s) => s.setOnboarded);
+  const avatar = useOtto((s) => s.avatar);
+  const setAvatar = useOtto((s) => s.setAvatar);
   const [step, setStep] = useState(0);
-  const data = STEPS[step];
-  const isLast = step === STEPS.length - 1;
+  const textStepIndex = step > AVATAR_STEP ? step - 1 : step;
+  const data = STEPS[textStepIndex];
+  const isLast = step === TOTAL_STEPS - 1;
 
   const finish = (href: '/record' | '/shelf') => {
     setOnboarded(true);
@@ -72,67 +79,88 @@ export default function Onboarding() {
           </AppText>
         </Pressable>
 
-        <View style={styles.center}>
-          <Animated.View key={`art-${step}`} entering={FadeIn.duration(420)} style={styles.art}>
-            <Otto size={data.ottoSize} energy="happy" />
-          </Animated.View>
-
-          <Animated.View key={`copy-${step}`} entering={FadeInDown.duration(420)} style={styles.copy}>
-            <AppText size={13} weight="semibold" color="accent" letterSpacing={1.2} center>
-              {data.eyebrow.toUpperCase()}
-            </AppText>
-            <AppText size={32} weight="bold" letterSpacing={-0.6} center>
-              {data.title}
-            </AppText>
-            {data.body ? (
-              <AppText size={16} color="textSecondary" lineHeight={24} center style={styles.body}>
-                {data.body}
-              </AppText>
-            ) : null}
-
-            {data.bullets ? (
-              <View style={styles.bullets}>
-                {data.bullets.map((b) => (
-                  <View key={b.title} style={[styles.bullet, Shadow.soft]}>
-                    <View style={styles.bulletIcon}>
-                      <Icon name={b.icon} size={22} color={Colors.light.accent} strokeWidth={2} />
-                    </View>
-                    <View style={{ flex: 1, gap: 2 }}>
-                      <AppText size={15.5} weight="semibold">
-                        {b.title}
-                      </AppText>
-                      <AppText size={13.5} color="textSecondary" lineHeight={19}>
-                        {b.sub}
-                      </AppText>
-                    </View>
-                  </View>
-                ))}
-              </View>
-            ) : null}
-          </Animated.View>
-        </View>
-
-        <View style={styles.footer}>
-          <View style={styles.dots}>
-            {STEPS.map((_, i) => (
-              <View key={i} style={[styles.dot, i === step && styles.dotActive]} />
-            ))}
+        {step === AVATAR_STEP ? (
+          <View style={styles.avatarShell}>
+            <AvatarBuilder
+              value={avatar}
+              onChange={setAvatar}
+              onBack={() => setStep(0)}
+              onDone={() => setStep(2)}
+            />
+            <ProgressDots step={step} />
           </View>
-          <Button
-            label={data.cta}
-            icon={isLast ? 'mic' : undefined}
-            fullWidth
-            onPress={() => (isLast ? finish('/record') : setStep((s) => s + 1))}
-          />
-        </View>
+        ) : (
+          <>
+            <View style={styles.center}>
+              <Animated.View key={`art-${step}`} entering={FadeIn.duration(420)} style={styles.art}>
+                <Otto size={data.ottoSize} energy="happy" />
+              </Animated.View>
+
+              <Animated.View key={`copy-${step}`} entering={FadeInDown.duration(420)} style={styles.copy}>
+                <AppText size={13} weight="semibold" color="accent" letterSpacing={1.2} center>
+                  {data.eyebrow.toUpperCase()}
+                </AppText>
+                <AppText size={32} weight="bold" letterSpacing={-0.6} center>
+                  {data.title}
+                </AppText>
+                {data.body ? (
+                  <AppText size={16} color="textSecondary" lineHeight={24} center style={styles.body}>
+                    {data.body}
+                  </AppText>
+                ) : null}
+
+                {data.bullets ? (
+                  <View style={styles.bullets}>
+                    {data.bullets.map((b) => (
+                      <View key={b.title} style={[styles.bullet, Shadow.soft]}>
+                        <View style={styles.bulletIcon}>
+                          <Icon name={b.icon} size={22} color={Colors.light.accent} strokeWidth={2} />
+                        </View>
+                        <View style={{ flex: 1, gap: 2 }}>
+                          <AppText size={15.5} weight="semibold">
+                            {b.title}
+                          </AppText>
+                          <AppText size={13.5} color="textSecondary" lineHeight={19}>
+                            {b.sub}
+                          </AppText>
+                        </View>
+                      </View>
+                    ))}
+                  </View>
+                ) : null}
+              </Animated.View>
+            </View>
+
+            <View style={styles.footer}>
+              <ProgressDots step={step} />
+              <Button
+                label={data.cta}
+                icon={isLast ? 'mic' : undefined}
+                fullWidth
+                onPress={() => (isLast ? finish('/record') : setStep((s) => s + 1))}
+              />
+            </View>
+          </>
+        )}
       </View>
     </Screen>
+  );
+}
+
+function ProgressDots({ step }: { step: number }) {
+  return (
+    <View style={styles.dots}>
+      {Array.from({ length: TOTAL_STEPS }, (_, i) => (
+        <View key={i} style={[styles.dot, i === step && styles.dotActive]} />
+      ))}
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   root: { flex: 1, width: '100%' },
   skip: { position: 'absolute', top: 0, right: 0, padding: Spacing.two, zIndex: 2 },
+  avatarShell: { flex: 1, gap: Spacing.three, paddingTop: Spacing.two },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: Spacing.five },
   art: { alignItems: 'center' },
   copy: { alignItems: 'center', gap: Spacing.two, width: '100%' },

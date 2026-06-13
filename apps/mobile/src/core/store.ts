@@ -13,6 +13,7 @@ import {
 } from '@/core/seed';
 import type {
   Achievement,
+  AvatarChoices,
   ChatMessage,
   CompanionTurn,
   Entry,
@@ -43,6 +44,8 @@ type OttoState = {
 
   onboarded: boolean;
   setOnboarded: (v: boolean) => void;
+  avatar: AvatarChoices;
+  setAvatar: (avatar: AvatarChoices) => void;
 
   setDraft: (text: string) => void;
   attachDemoPhotos: () => void;
@@ -79,6 +82,15 @@ export const useOtto = create<OttoState>((set, get) => ({
 
   onboarded: false,
   setOnboarded: (v) => set({ onboarded: v }),
+  avatar: {
+    presetId: 'wavy-brown-freckles',
+    skinTone: 'warm',
+    hairStyle: 'wavy',
+    hairColor: 'brown',
+    detail: 'freckles',
+    accessory: 'none',
+  },
+  setAvatar: (avatar) => set({ avatar }),
 
   setDraft: (text) => set({ draftTranscript: text }),
   attachDemoPhotos: () => set({ draftAttachments: DEMO_ATTACHMENTS }),

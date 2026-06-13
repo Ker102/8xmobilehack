@@ -40,7 +40,7 @@ Default tab on launch: **Shelf** for returning users, **Record** for brand-new u
 5. **Account/save** — only *after* the first page is revealed.
 
 **[HACKATHON]** Keep 2 + 4 + the reveal. Hardcode the avatar. Skip accounts (local only).
-**[IN DEMO]** Three-step onboarding-lite: **Welcome → Meet Otto → How it works**, with Skip and Start journaling actions. A fresh load opens here so the demo has a clean cold open before Record.
+**[IN DEMO]** Four-step onboarding-lite: **Welcome → Build your avatar → Meet Otto → How it works**, with Skip and Start journaling actions. The avatar builder uses the available pre-rendered avatar assets as selectable presets with mockup-style skin, hair, detail, and accessory controls. A fresh load opens here so the demo has a clean cold open before Record.
 
 ---
 
