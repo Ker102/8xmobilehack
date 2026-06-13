@@ -29,6 +29,10 @@ Each pull request should include:
 - Test or validation evidence.
 - Documentation updates when architecture or product behavior changes.
 
+## Releases
+
+Releases are created from `main` through the GitHub Actions `Release` workflow. During the hackathon, use demo prerelease tags such as `demo-v0.1.0`. See `docs/RELEASE_POLICY.md`.
+
 ## Security
 
 Never commit secrets, tokens, API keys, exports, private certificates, or `.env` files. Use environment variables and repository secrets.

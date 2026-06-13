@@ -7,6 +7,7 @@ This repository is for a hackathon build that must stay presentation-ready.
 - Keep the architecture understandable to non-technical judges.
 - Prefer small, well-named modules with clear boundaries.
 - Update docs in the same pull request as behavior changes.
+- Keep release and deployment policy aligned with `docs/RELEASE_POLICY.md`.
 - Keep secrets out of source control and use environment variables.
 - Run `npm run validate` before committing.
 

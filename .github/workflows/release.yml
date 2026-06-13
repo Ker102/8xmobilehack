@@ -1,0 +1,112 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      channel:
+        description: Release channel
+        required: true
+        default: demo
+        type: choice
+        options:
+          - demo
+          - preview
+          - production
+      version:
+        description: Semantic version without prefix, for example 0.1.0
+        required: true
+        default: 0.1.0
+      notes:
+        description: Short release notes
+        required: true
+        default: Initial demo release.
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Create GitHub release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate repository
+        run: npm run validate
+
+      - name: Audit dependencies
+        run: npm run security:audit
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CHANNEL: ${{ inputs.channel }}
+          VERSION: ${{ inputs.version }}
+          NOTES: ${{ inputs.notes }}
+        run: |
+          set -euo pipefail
+
+          if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "Version must use semantic format like 0.1.0" >&2
+            exit 1
+          fi
+
+          case "$CHANNEL" in
+            demo)
+              TAG="demo-v${VERSION}"
+              TITLE="Demo v${VERSION}"
+              PRERELEASE="--prerelease"
+              ;;
+            preview)
+              TAG="preview-v${VERSION}"
+              TITLE="Preview v${VERSION}"
+              PRERELEASE="--prerelease"
+              ;;
+            production)
+              TAG="v${VERSION}"
+              TITLE="v${VERSION}"
+              PRERELEASE=""
+              ;;
+            *)
+              echo "Unknown release channel: ${CHANNEL}" >&2
+              exit 1
+              ;;
+          esac
+
+          if git rev-parse "$TAG" >/dev/null 2>&1 || gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release tag already exists: ${TAG}" >&2
+            exit 1
+          fi
+
+          {
+            echo "## Summary"
+            echo
+            echo "$NOTES"
+            echo
+            echo "## Validation"
+            echo
+            echo "- Repository validation passed."
+            echo "- npm audit passed at moderate threshold."
+            echo
+            echo "## Channel"
+            echo
+            echo "- ${CHANNEL}"
+          } > release-notes.md
+
+          gh release create "$TAG" \
+            --target "$GITHUB_SHA" \
+            --title "$TITLE" \
+            --notes-file release-notes.md \
+            $PRERELEASE

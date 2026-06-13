@@ -65,3 +65,9 @@ Firecrawl uses the `FIRECRAWL_API_KEY` environment variable. Do not paste API ke
 ## Delivery Notes
 
 Use [docs/CASE_STUDY.md](docs/CASE_STUDY.md) as the judge-facing story and [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) as the system walkthrough. Keep both updated whenever the implementation changes.
+
+## Releases
+
+Hackathon releases start as demo releases. Use [docs/RELEASE_POLICY.md](docs/RELEASE_POLICY.md) for the policy and [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for the deployment record.
+
+The first demo release should be tagged `demo-v0.1.0` through the GitHub Actions `Release` workflow.
