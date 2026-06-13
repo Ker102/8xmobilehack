@@ -38,24 +38,24 @@ function FeedCard({ item }: { item: FeedItem }) {
   const cover = item.page.panels[0];
   return (
     <View style={[styles.card, Shadow.card]}>
-      <View style={styles.authorRow}>
-        <View style={[styles.avatar, { backgroundColor: item.authorColor }]}>
-          <AppText size={15} weight="bold" color="#fff">
-            {item.authorName[0].toUpperCase()}
+      <View style={styles.cardBody}>
+        <View style={styles.copy}>
+          <View style={styles.metaRow}>
+            <View style={[styles.avatarDot, { backgroundColor: item.authorColor }]} />
+            <AppText size={13.5} color="textSecondary">
+              {item.authorName} · {item.genre}
+            </AppText>
+          </View>
+          <AppText size={23} weight="bold" letterSpacing={-0.45} lineHeight={27}>
+            {item.page.title}
           </AppText>
+          <AppText size={15} color="textSecondary" lineHeight={21} numberOfLines={3}>
+            {item.page.narration[0]}
+          </AppText>
+          <MoodPill mood={item.page.mood} />
         </View>
-        <View style={{ flex: 1 }}>
-          <AppText size={15} weight="semibold">
-            {item.authorName}
-          </AppText>
-          <AppText size={12.5} color="textFaint">
-            {item.genre}
-          </AppText>
-        </View>
-        <MoodPill mood={item.page.mood} />
+        <Panel panel={cover} height={88} width={88} rounded={Radius.md} iconSize={28} />
       </View>
-
-      <Panel panel={cover} height={300} rounded={0} />
 
       <View style={styles.actions}>
         {item.reactions.map((r) => (
@@ -69,14 +69,6 @@ function FeedCard({ item }: { item: FeedItem }) {
         <Icon name="bookmark" size={20} color={Colors.light.text} strokeWidth={2} />
       </View>
 
-      <View style={styles.caption}>
-        <AppText size={16.5} weight="semibold" letterSpacing={-0.2}>
-          {item.page.title}
-        </AppText>
-        <AppText size={14.5} color="textSecondary" lineHeight={21}>
-          {item.page.narration[0]}
-        </AppText>
-      </View>
     </View>
   );
 }
@@ -93,17 +85,17 @@ const styles = StyleSheet.create({
     borderRadius: Radius.lg,
     borderWidth: 1,
     borderColor: Colors.light.borderSoft,
-    overflow: 'hidden',
+    padding: Spacing.three,
   },
-  authorRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.two + 2, padding: Spacing.three },
-  avatar: { width: 38, height: 38, borderRadius: 19, alignItems: 'center', justifyContent: 'center' },
+  cardBody: { flexDirection: 'row', alignItems: 'flex-start', gap: Spacing.three },
+  copy: { flex: 1, gap: 7 },
+  metaRow: { flexDirection: 'row', alignItems: 'center', gap: 7 },
+  avatarDot: { width: 8, height: 8, borderRadius: 4 },
   actions: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.three,
-    paddingHorizontal: Spacing.three,
     paddingTop: Spacing.three,
   },
   action: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-  caption: { paddingHorizontal: Spacing.three, paddingTop: Spacing.two + 2, paddingBottom: Spacing.three, gap: 5 },
 });

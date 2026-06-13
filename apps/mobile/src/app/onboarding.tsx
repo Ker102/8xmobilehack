@@ -95,7 +95,7 @@ export default function Onboarding() {
                 {data.bullets.map((b) => (
                   <View key={b.title} style={[styles.bullet, Shadow.soft]}>
                     <View style={styles.bulletIcon}>
-                      <Icon name={b.icon} size={20} color={Colors.light.accentDeep} strokeWidth={2.1} />
+                      <Icon name={b.icon} size={22} color={Colors.light.accent} strokeWidth={2} />
                     </View>
                     <View style={{ flex: 1, gap: 2 }}>
                       <AppText size={15.5} weight="semibold">
@@ -149,10 +149,8 @@ const styles = StyleSheet.create({
     padding: Spacing.three,
   },
   bulletIcon: {
-    width: 42,
+    width: 28,
     height: 42,
-    borderRadius: 13,
-    backgroundColor: Colors.light.accentSoft,
     alignItems: 'center',
     justifyContent: 'center',
   },

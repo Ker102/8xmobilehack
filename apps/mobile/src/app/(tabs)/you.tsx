@@ -76,12 +76,12 @@ function Milestone({ achievement }: { achievement: Achievement }) {
   const on = achievement.unlocked;
   return (
     <View style={styles.milestone}>
-      <View style={[styles.milestoneIcon, { backgroundColor: on ? Colors.light.accentSoft : Colors.light.backgroundElement }]}>
+      <View style={styles.milestoneIcon}>
         <Icon
           name={achievement.icon}
-          size={18}
-          color={on ? Colors.light.accentDeep : Colors.light.textFaint}
-          strokeWidth={2.2}
+          size={19}
+          color={on ? Colors.light.accent : Colors.light.textFaint}
+          strokeWidth={2}
         />
       </View>
       <View style={{ flex: 1 }}>
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     ...Shadow.soft,
   },
   milestone: { flexDirection: 'row', alignItems: 'center', gap: Spacing.three, paddingVertical: Spacing.three },
-  milestoneIcon: { width: 38, height: 38, borderRadius: 12, alignItems: 'center', justifyContent: 'center' },
+  milestoneIcon: { width: 26, alignItems: 'center', justifyContent: 'center' },
   memCard: {
     backgroundColor: Colors.light.surface,
     borderRadius: Radius.lg,
