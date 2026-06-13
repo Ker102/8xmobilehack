@@ -7,7 +7,7 @@ import { Panel } from '@/components/Panel';
 import { Colors, Radius, Shadow, Spacing } from '@/constants/theme';
 import { useOtto } from '@/core/store';
 import type { Entry } from '@/core/types';
-import { AppText, Chip, Icon, Screen } from '@/design';
+import { AppText, Icon, Screen } from '@/design';
 
 export default function ShelfScreen() {
   const router = useRouter();
@@ -17,15 +17,20 @@ export default function ShelfScreen() {
   return (
     <Screen>
       <View style={styles.header}>
-        <View style={{ flex: 1, gap: 3 }}>
-          <AppText size={30} weight="bold" letterSpacing={-0.5}>
+        <View style={styles.titleBlock}>
+          <AppText size={34} weight="bold" letterSpacing={-0.8}>
             Your Shelf
           </AppText>
           <AppText size={14.5} color="textSecondary">
             {entries.length} pages · private by default
           </AppText>
         </View>
-        <Chip label={`${streak}-day streak`} tone="accent" icon="flame" />
+        <View style={styles.streak}>
+          <Icon name="flame" size={15} color={Colors.light.accent} strokeWidth={2} />
+          <AppText size={14} weight="medium" color="textSecondary">
+            {streak}-day streak
+          </AppText>
+        </View>
       </View>
 
       <View style={styles.list}>
@@ -44,9 +49,9 @@ function EntryCard({ entry, onPress }: { entry: Entry; onPress: () => void }) {
   const shared = entry.privacy === 'public';
   return (
     <Pressable onPress={onPress} style={({ pressed }) => [styles.card, Shadow.card, pressed && styles.pressed]}>
-      <Panel panel={cover} height={84} width={84} rounded={Radius.md} iconSize={30} />
+      <Panel panel={cover} height={104} width={104} rounded={Radius.lg - 4} iconSize={34} />
       <View style={styles.cardBody}>
-        <AppText size={16.5} weight="semibold" numberOfLines={2} letterSpacing={-0.2}>
+        <AppText size={21} weight="bold" numberOfLines={2} letterSpacing={-0.45} lineHeight={25}>
           {entry.page.title}
         </AppText>
         <View style={styles.metaRow}>
@@ -57,7 +62,9 @@ function EntryCard({ entry, onPress }: { entry: Entry; onPress: () => void }) {
           </AppText>
         </View>
       </View>
-      <Icon name={shared ? 'globe' : 'lock'} size={16} color={Colors.light.textFaint} strokeWidth={2} />
+      <View style={styles.privacy}>
+        <Icon name={shared ? 'globe' : 'lock'} size={18} color={Colors.light.textFaint} strokeWidth={1.9} />
+      </View>
     </Pressable>
   );
 }
@@ -67,21 +74,23 @@ function formatDate(iso: string) {
 }
 
 const styles = StyleSheet.create({
-  header: { flexDirection: 'row', alignItems: 'center', gap: Spacing.three, marginBottom: Spacing.four },
-  list: { gap: Spacing.three },
+  header: { flexDirection: 'row', alignItems: 'flex-start', gap: Spacing.three, marginBottom: Spacing.five },
+  titleBlock: { flex: 1, gap: 4 },
+  streak: { flexDirection: 'row', alignItems: 'center', gap: 6, paddingTop: 8 },
+  list: { gap: Spacing.four },
   card: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: Spacing.three,
+    gap: Spacing.four,
     backgroundColor: Colors.light.surface,
-    borderRadius: Radius.lg,
+    borderRadius: Radius.xl,
     borderWidth: 1,
     borderColor: Colors.light.borderSoft,
-    padding: Spacing.two + 2,
-    paddingRight: Spacing.three,
+    padding: Spacing.three,
   },
   pressed: { opacity: 0.85 },
-  cardBody: { flex: 1, gap: 7 },
+  cardBody: { flex: 1, gap: 9 },
   metaRow: { flexDirection: 'row', alignItems: 'center', gap: Spacing.two },
   dotSep: { width: 3, height: 3, borderRadius: 2, backgroundColor: Colors.light.textFaint },
+  privacy: { alignSelf: 'center', paddingLeft: Spacing.one },
 });
