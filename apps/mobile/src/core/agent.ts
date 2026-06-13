@@ -5,7 +5,7 @@ import type { Page } from '@/core/types';
 /**
  * Scripted stand-in for the async formatting agent. The trace below is a
  * legible "agent is thinking + calling tools" sequence — the same shape a real
- * LangGraph run would emit (transcribe -> analyse -> recall memory -> structure
+ * LangGraph run would emit (transcribe -> analyse -> inspect references -> structure
  * -> illustrate -> narrate), but timed and offline so the demo never fails.
  */
 
@@ -21,13 +21,13 @@ export type AgentToolCall = {
 export type AgentEvent = AgentThought | AgentToolCall;
 
 export const AGENT_TRACE: AgentEvent[] = [
-  { kind: 'thought', text: 'Listening to how today actually felt…', durationMs: 1100 },
+  { kind: 'thought', text: 'Listening for the story beats…', durationMs: 1100 },
   {
     kind: 'tool',
     tool: 'transcribe',
     icon: 'audio',
-    args: 'audio · 0:48',
-    result: '96 words captured',
+    args: 'story audio · 2:14',
+    result: '608 words captured',
     durationMs: 1100,
   },
   {
@@ -35,39 +35,39 @@ export const AGENT_TRACE: AgentEvent[] = [
     tool: 'read_mood',
     icon: 'sparkles',
     args: 'transcript',
-    result: 'joyful · high energy',
+    result: 'chaotic · funny · embarrassed',
     durationMs: 950,
   },
   {
     kind: 'tool',
     tool: 'inspect_photos',
     icon: 'image',
-    args: '4 reference photos',
-    result: 'venue · whiteboard · build · pitch night',
+    args: '1 reference image',
+    result: 'handcuffs · siren · moon · pocket watch',
     durationMs: 1050,
   },
-  { kind: 'thought', text: 'This connects to what they told me before.', durationMs: 1000 },
+  { kind: 'thought', text: 'This needs to feel absurd, not mean.', durationMs: 1000 },
   {
     kind: 'tool',
     tool: 'recall_memory',
     icon: 'brain',
-    args: 'user · hackathon',
-    result: 'building Otto with 2 teammates · pitch tomorrow',
+    args: 'user · story style',
+    result: 'likes deadpan captions · keep family private',
     durationMs: 1200,
   },
   {
     kind: 'tool',
     tool: 'draft_structure',
     icon: 'list',
-    args: 'arc · 4 beats',
-    result: '4 scenes outlined',
+    args: 'comic escalation · 4 beats',
+    result: 'door · spoon · street · wallet',
     durationMs: 1050,
   },
   {
     kind: 'tool',
     tool: 'illustrate',
     icon: 'image',
-    args: '4 panels · avatar-locked',
+    args: '4 panels · reference-aware',
     result: '4 panels rendered',
     durationMs: 1300,
   },
@@ -75,8 +75,8 @@ export const AGENT_TRACE: AgentEvent[] = [
     kind: 'tool',
     tool: 'compose_narration',
     icon: 'quote',
-    args: 'voice · warm',
-    result: 'narration written',
+    args: 'voice · deadpan',
+    result: 'clean storytime narration',
     durationMs: 1000,
   },
   { kind: 'thought', text: 'Done. Saving the page to your shelf.', durationMs: 900 },

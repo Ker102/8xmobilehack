@@ -53,7 +53,7 @@ Default tab on launch: **Shelf** for returning users, **Record** for brand-new u
 ### 3.5 Typed path — same loop with a text box; the reliable demo path.
 
 **[HACKATHON]** Text path is the reliable demo path; pre-cache one page as stage fallback.
-**[IN DEMO]** Both an animated record button (waveform + timer) and the typed path show four pre-attached demo photos before generation. They feed a scripted agent trace: Otto thinks while tool calls stream in (`transcribe → read_mood → inspect_photos → recall_memory → draft_structure → illustrate → compose_narration`). The trace resolves to the pre-authored page and reveals it with Otto's mood reaction, the photos Otto used, a narration play affordance, Save→Shelf and Share→Feed.
+**[IN DEMO]** Both an animated record button (waveform + timer) and the typed path show a pre-attached story reference image before generation. They feed a scripted agent trace: Otto thinks while tool calls stream in (`transcribe → read_mood → inspect_photos → recall_memory → draft_structure → illustrate → compose_narration`). The trace resolves to the pre-authored "2am police" story page and reveals it with Otto's mood reaction, the image Otto used, a narration play affordance, Save→Shelf and Share→Feed.
 
 ---
 

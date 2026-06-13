@@ -22,6 +22,7 @@ export type Panel = {
   caption: string;
   icon: IconName;
   swatch: SwatchName;
+  imageKey?: string;
 };
 
 export type Page = {
@@ -37,6 +38,7 @@ export type PhotoAttachment = {
   caption: string;
   icon: IconName;
   swatch: SwatchName;
+  imageKey?: string;
 };
 
 export type AvatarChoices = {

@@ -13,7 +13,7 @@ import { MOODS } from '@/core/types';
 import { AppText, Button, Icon, Screen } from '@/design';
 
 const REACTIONS: Record<string, string> = {
-  joy: 'Otto lit up. “That one sparkled — I saved it bright.”',
+  joy: 'Otto blinked twice. “That was absolute chaos — I kept it deadpan.”',
   warm: 'Otto glowed softly. “A good, warm day. I kept it cozy.”',
   calm: 'Otto settled in close. “Calm suits you. Page kept gentle.”',
   low: 'Otto dimmed and sat near. “Heavy day. I held it carefully.”',
@@ -57,7 +57,7 @@ export default function RevealScreen() {
 
       <AttachmentStrip
         attachments={attachments}
-        title="Photos Otto used"
+        title="Image Otto used"
         actionLabel="Add more"
         onAdd={entry ? () => addAttachmentToEntry(entry.id) : undefined}
       />

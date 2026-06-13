@@ -3,58 +3,39 @@ import type { Achievement, CompanionTurn, Entry, FeedItem, MemoryItem, Page, Pho
 
 export const DEMO_ATTACHMENTS: PhotoAttachment[] = [
   {
-    id: 'photo-venue',
-    label: 'Venue table',
-    caption: 'Long table, cables everywhere',
-    icon: 'plug',
-    swatch: 'sand',
-  },
-  {
-    id: 'photo-whiteboard',
-    label: 'Whiteboard',
-    caption: 'The idea finally clicked',
-    icon: 'bulb',
-    swatch: 'sky',
-  },
-  {
-    id: 'photo-build',
-    label: 'First screen',
-    caption: 'The moment the animation landed',
-    icon: 'rocket',
+    id: 'photo-police-props',
+    label: '2am evidence',
+    caption: 'Handcuffs, siren, moon, pocket watch',
+    icon: 'lock',
     swatch: 'blue',
-  },
-  {
-    id: 'photo-late',
-    label: 'Pitch night',
-    caption: 'Late room before demo day',
-    icon: 'moon',
-    swatch: 'mist',
+    imageKey: 'policeStory',
   },
 ];
 
-/** The page produced live during the demo (the hackathon "build day"). */
+/** The page produced live during the demo (the storytime showcase). */
 export const DEMO_PAGE: Page = {
-  title: 'The Day We Built Otto',
+  title: 'All I saw was the police arresting my naked dad at 2am.',
   mood: 'joy',
   narration: [
-    'Today started at a long table full of strangers and three power strips fighting for one outlet.',
-    'By noon the strangers were a team, and the whiteboard finally said something we believed in.',
-    'We shipped the first screen at 2pm and actually gasped when the animation landed.',
-    'It is late now. The room hums. Tomorrow we pitch — but tonight, this felt like something.',
+    'I woke up to violent banging downstairs and someone shouting, “Police! Open the door!”',
+    'Dad ran past my bedroom wearing nothing but one grey sock, holding a wooden spoon like a medieval weapon.',
+    'Outside, three officers watched him check his car while every porch light on the street came alive.',
+    'After the handcuffs came off, Mum pointed to the kitchen counter. His wallet had been beside the kettle the whole time.',
   ],
   panels: [
-    { id: 'p1', caption: 'One outlet, three laptops, zero plan.', icon: 'plug', swatch: 'sand' },
-    { id: 'p2', caption: 'The whiteboard finally made sense.', icon: 'bulb', swatch: 'sky' },
-    { id: 'p3', caption: 'First screen shipped. We gasped.', icon: 'rocket', swatch: 'blue' },
-    { id: 'p4', caption: 'Late-night hum before the pitch.', icon: 'moon', swatch: 'mist' },
+    { id: 'p1', caption: 'Police at the door, 2am.', icon: 'clock', swatch: 'mist', imageKey: 'policeStory' },
+    { id: 'p2', caption: 'One sock, one spoon, zero context.', icon: 'skull', swatch: 'peach' },
+    { id: 'p3', caption: 'The whole street quietly woke up.', icon: 'globe', swatch: 'sky' },
+    { id: 'p4', caption: 'The wallet was beside the kettle.', icon: 'coffee', swatch: 'sand' },
   ],
 };
 
 export const DEMO_TRANSCRIPT =
-  "Okay so today was the hackathon. We started with basically nothing, just a table and a name. " +
-  'Spent the morning arguing about the idea, but around noon it clicked and we finally agreed. ' +
-  'We got the first screen working in the afternoon and the animation actually looked amazing. ' +
-  "It's super late now and we still have to pitch tomorrow, but honestly this is the best I've felt all week.";
+  'I woke up to violent banging downstairs, followed by someone shouting, “Police! Open the door!” ' +
+  'Dad sprinted past my bedroom wearing absolutely nothing except one grey sock, holding a wooden spoon, and whispered, “Don’t panic.” ' +
+  'By the time I reached the hallway he was in front of three police officers, naked, pointing the spoon like it was a weapon. ' +
+  'They were looking for someone trying car doors, but Dad ran outside to check his car, still naked, still wearing one sock, still holding the spoon. ' +
+  'The neighbours woke up, Dad got handcuffed against his own car, and after everyone realised he was just half-asleep, Mum pointed out that his wallet had been beside the kettle the whole time.';
 
 const arrivePage: Page = {
   title: 'Check-in & Caffeine',
@@ -172,8 +153,8 @@ export const SEED_FEED: FeedItem[] = [
 ];
 
 export const SEED_MEMORY: MemoryItem[] = [
-  { id: 'm1', label: 'Team', value: 'Building Otto with two teammates', source: 'onboarding' },
-  { id: 'm2', label: 'Goal', value: 'Pitch the demo tomorrow morning', source: 'entry' },
+  { id: 'm1', label: 'Story style', value: 'Likes deadpan captions for chaotic family stories', source: 'onboarding' },
+  { id: 'm2', label: 'Privacy', value: 'Keep family details playful and anonymised', source: 'entry' },
 ];
 
 export const SEED_ACHIEVEMENTS: Achievement[] = [
@@ -186,20 +167,20 @@ export const SEED_ACHIEVEMENTS: Achievement[] = [
 
 export const COMPANION_SCRIPT: CompanionTurn[] = [
   {
-    ottoPrompt: 'You sound wired tonight. What actually made today click?',
-    userReply: 'The moment our first screen animated and the whole team gasped.',
-    memory: { label: 'Proud moment', value: 'First screen animation made the team gasp', source: 'chat' },
-    personalization: 'Added “the gasp moment” as the emotional peak of today’s page.',
+    ottoPrompt: 'That story is chaos. Which detail should I make the funniest without being mean?',
+    userReply: 'The wooden spoon. He genuinely held it like it could protect him.',
+    memory: { label: 'Comedic detail', value: 'Wooden spoon is the funniest beat', source: 'chat' },
+    personalization: 'Made the spoon the recurring visual gag across the page.',
   },
   {
-    ottoPrompt: 'Who was right there with you when it happened?',
-    userReply: 'My two teammates — we basically became a team today.',
-    memory: { label: 'People', value: 'Two teammates who became close today', source: 'chat' },
+    ottoPrompt: 'Should I keep your dad anonymous if this ever gets shared?',
+    userReply: 'Yes. Make it funny, but do not make him identifiable.',
+    memory: { label: 'Family privacy', value: 'Keep dad anonymous in shared story pages', source: 'chat' },
   },
   {
-    ottoPrompt: 'How are you feeling about the pitch tomorrow — honestly?',
-    userReply: 'Nervous, but the good kind. I think we have something real.',
-    memory: { label: 'Tomorrow', value: 'Nervous-excited about the pitch', source: 'chat' },
+    ottoPrompt: 'What tone should the page use — dramatic, deadpan, or full cartoon?',
+    userReply: 'Deadpan. The story is already ridiculous enough.',
+    memory: { label: 'Tone', value: 'Prefers deadpan narration for ridiculous stories', source: 'chat' },
   },
 ];
 

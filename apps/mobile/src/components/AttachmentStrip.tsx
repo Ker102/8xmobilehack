@@ -1,6 +1,7 @@
-import { Pressable, StyleSheet, View } from 'react-native';
+import { Image, Pressable, StyleSheet, View } from 'react-native';
 
 import { Colors, Radius, Shadow, Spacing, Swatch } from '@/constants/theme';
+import { getDemoImage } from '@/core/imageAssets';
 import type { PhotoAttachment } from '@/core/types';
 import { AppText, Icon } from '@/design';
 
@@ -41,10 +42,15 @@ export function AttachmentStrip({
       <View style={styles.list}>
         {attachments.map((item) => {
           const swatch = Swatch[item.swatch];
+          const image = getDemoImage(item.imageKey);
           return (
             <View key={item.id} style={[styles.item, Shadow.soft]}>
               <View style={[styles.thumb, { backgroundColor: swatch.bg }]}>
-                <Icon name={item.icon} size={24} color={swatch.fg} strokeWidth={1.8} />
+                {image ? (
+                  <Image source={image} style={styles.photo} resizeMode="cover" />
+                ) : (
+                  <Icon name={item.icon} size={24} color={swatch.fg} strokeWidth={1.8} />
+                )}
               </View>
               <AppText size={12.5} weight="medium" numberOfLines={1}>
                 {item.label}
@@ -79,5 +85,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderWidth: 1,
     borderColor: Colors.light.borderSoft,
+    overflow: 'hidden',
   },
+  photo: { width: '100%', height: '100%' },
 });

@@ -72,8 +72,8 @@ export default function RecordScreen() {
 
         <AttachmentStrip
           attachments={attachments}
-          title="Attached for this page"
-          actionLabel="Add photos"
+          title="Attached story image"
+          actionLabel="Add image"
           onAdd={attachDemoPhotos}
         />
 
