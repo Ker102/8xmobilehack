@@ -1,0 +1,17 @@
+---
+description: Use when updating architecture, README, case-study, roadmap, or demo documentation.
+globs:
+  - "README.md"
+  - "docs/**/*.md"
+alwaysApply: false
+---
+
+# Judge-Ready Documentation
+
+Write for smart readers who may not be engineers. Use plain language first, then technical detail. Prefer diagrams and tables when they make the system easier to explain out loud.
+
+Every major document should answer:
+
+- What problem are we solving?
+- How does the system work?
+- What evidence shows this can become production-grade?

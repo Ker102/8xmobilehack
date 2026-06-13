@@ -1,0 +1,15 @@
+{
+  "name": "8xmobilehack",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Production-ready starter repository for the 8x mobile hackathon.",
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate-repo.mjs",
+    "test": "npm run validate",
+    "security:audit": "npm audit --audit-level=moderate"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

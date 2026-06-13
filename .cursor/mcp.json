@@ -1,0 +1,26 @@
+{
+  "mcpServers": {
+    "context7": {
+      "command": "C:\\Program Files\\nodejs\\npx.cmd",
+      "args": ["-y", "@upstash/context7-mcp"]
+    },
+    "firecrawl": {
+      "command": "C:\\Program Files\\nodejs\\npx.cmd",
+      "args": ["-y", "firecrawl-mcp"],
+      "env": {
+        "FIRECRAWL_API_KEY": "${env:FIRECRAWL_API_KEY}"
+      }
+    },
+    "node-repl": {
+      "command": "C:\\Users\\ivo\\AppData\\Local\\OpenAI\\Codex\\runtimes\\cua_node\\789504f803e82e2b\\bin\\node_repl.exe",
+      "args": [],
+      "env": {
+        "NODE_REPL_NATIVE_PIPE_CONNECT_TIMEOUT_MS": "1000",
+        "NODE_REPL_NODE_MODULE_DIRS": "C:\\Users\\ivo\\AppData\\Local\\OpenAI\\Codex\\runtimes\\cua_node\\789504f803e82e2b\\bin\\node_modules",
+        "NODE_REPL_NODE_PATH": "C:\\Users\\ivo\\AppData\\Local\\OpenAI\\Codex\\runtimes\\cua_node\\789504f803e82e2b\\bin\\node.exe",
+        "NODE_REPL_TRUSTED_CODE_PATHS": "C:\\Users\\ivo\\.codex;C:\\Users\\ivo\\Documents\\8xmobilehack",
+        "CODEX_HOME": "C:\\Users\\ivo\\.codex"
+      }
+    }
+  }
+}

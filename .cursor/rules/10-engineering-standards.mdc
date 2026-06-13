@@ -1,0 +1,14 @@
+---
+description: Engineering standards for implementation work in this repository.
+globs:
+  - "**/*"
+alwaysApply: false
+---
+
+# Engineering Standards
+
+- Prefer small modules with clear responsibilities.
+- Add validation or tests for changed behavior.
+- Keep secrets in environment variables, not source files.
+- Run `npm run validate` before proposing a completed change.
+- Preserve the documentation-first structure unless the team intentionally replaces it.
