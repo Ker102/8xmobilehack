@@ -26,7 +26,7 @@ export function Panel({ panel, height = 200, width, rounded = Radius.lg, iconSiz
         width != null ? { width } : { alignSelf: 'stretch' },
       ]}>
       {image ? (
-        <Image source={image} style={styles.image} resizeMode="cover" />
+        <Image source={image} style={styles.image} resizeMode="contain" />
       ) : (
         <Icon name={panel.icon} size={size} color={swatch.fg} strokeWidth={1.75} />
       )}
@@ -42,5 +42,5 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: Colors.light.borderSoft,
   },
-  image: { width: '100%', height: '100%' },
+  image: { width: '94%', height: '94%' },
 });

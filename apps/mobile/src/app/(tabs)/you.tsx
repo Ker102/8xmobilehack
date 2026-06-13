@@ -18,7 +18,7 @@ export default function YouScreen() {
   return (
     <Screen>
       <View style={styles.hero}>
-        <Otto size={92} />
+        <Otto size={92} state="happy" />
         <View style={{ gap: 3, alignItems: 'center' }}>
           <AppText size={24} weight="bold" letterSpacing={-0.4}>
             You

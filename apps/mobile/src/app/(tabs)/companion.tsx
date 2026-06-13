@@ -27,7 +27,7 @@ export default function CompanionScreen() {
   return (
     <Screen>
       <View style={styles.hero}>
-        <Otto size={104} energy="rest" />
+        <Otto size={104} energy="rest" state="waving" />
         <AppText size={22} weight="bold" letterSpacing={-0.3}>
           Otto
         </AppText>

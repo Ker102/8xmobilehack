@@ -65,7 +65,7 @@ export function AgentTrace({ onDone }: { onDone: () => void }) {
         <View style={styles.ottoStage}>
           <PulseRing pulse={pulse} delay={0} />
           <PulseRing pulse={pulse} delay={0.42} />
-          <Otto size={108} energy="happy" />
+          <Otto size={108} energy="happy" state="painting" />
         </View>
         <ThinkingLabel />
         <AppText size={12.5} weight="medium" color="textFaint" letterSpacing={0.5}>

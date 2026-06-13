@@ -1,5 +1,6 @@
+import { setAudioModeAsync, useAudioPlayer, useAudioPlayerStatus } from 'expo-audio';
 import { useRouter } from 'expo-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 
@@ -11,6 +12,8 @@ import { DEMO_ATTACHMENTS, DEMO_PAGE } from '@/core/seed';
 import { useOtto } from '@/core/store';
 import { MOODS } from '@/core/types';
 import { AppText, Button, Icon, Screen } from '@/design';
+
+const DEMO_POLICE_NARRATION = require('../../../assets/audio/demo-police-title.mp3');
 
 const REACTIONS: Record<string, string> = {
   joy: 'Otto blinked twice. “That was absolute chaos — I kept it deadpan.”',
@@ -30,27 +33,44 @@ export default function RevealScreen() {
   const page = entry?.page ?? DEMO_PAGE;
   const attachments = entry?.attachments ?? DEMO_ATTACHMENTS;
   const [replayKey, setReplayKey] = useState(0);
-  const [playing, setPlaying] = useState(false);
+  const player = useAudioPlayer(DEMO_POLICE_NARRATION);
+  const narrationStatus = useAudioPlayerStatus(player);
+
+  useEffect(() => {
+    void setAudioModeAsync({ playsInSilentMode: true });
+  }, []);
 
   const onSave = () => router.replace('/shelf');
   const onShare = () => {
     if (entry) shareEntry(entry.id);
     router.replace('/feed');
   };
+  const onToggleNarration = () => {
+    if (narrationStatus.playing) {
+      player.pause();
+      return;
+    }
+
+    if (narrationStatus.duration > 0 && narrationStatus.currentTime >= narrationStatus.duration) {
+      player.seekTo(0);
+    }
+
+    player.play();
+  };
 
   return (
     <Screen bottomInset={Spacing.six}>
       <Animated.View entering={FadeIn.duration(420)} style={styles.ottoRow}>
-        <Otto size={72} energy="happy" />
+        <Otto size={72} energy="happy" state="excited" />
         <AppText size={15} weight="medium" color="text" lineHeight={21} style={{ flex: 1 }}>
           {REACTIONS[page.mood]}
         </AppText>
       </Animated.View>
 
-      <Pressable style={styles.playPill} onPress={() => setPlaying((p) => !p)}>
+      <Pressable style={styles.playPill} onPress={onToggleNarration}>
         <Icon name="play" size={15} color={Colors.light.accentDeep} strokeWidth={2.4} fill={Colors.light.accentDeep} />
         <AppText size={14} weight="semibold" color="accentDeep">
-          {playing ? 'Narration playing' : 'Play narration'}
+          {narrationStatus.playing ? 'Narration playing' : 'Play narration'}
         </AppText>
         <View style={[styles.playDot, { backgroundColor: MOODS[page.mood].color }]} />
       </Pressable>

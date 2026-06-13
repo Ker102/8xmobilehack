@@ -47,7 +47,7 @@ export function AttachmentStrip({
             <View key={item.id} style={[styles.item, Shadow.soft]}>
               <View style={[styles.thumb, { backgroundColor: swatch.bg }]}>
                 {image ? (
-                  <Image source={image} style={styles.photo} resizeMode="cover" />
+                  <Image source={image} style={styles.photo} resizeMode="contain" />
                 ) : (
                   <Icon name={item.icon} size={24} color={swatch.fg} strokeWidth={1.8} />
                 )}
@@ -87,5 +87,5 @@ const styles = StyleSheet.create({
     borderColor: Colors.light.borderSoft,
     overflow: 'hidden',
   },
-  photo: { width: '100%', height: '100%' },
+  photo: { width: '92%', height: '92%' },
 });

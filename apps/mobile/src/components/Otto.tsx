@@ -1,4 +1,4 @@
-import { Image } from 'expo-image';
+import { Image, type ImageSource } from 'expo-image';
 import { useEffect } from 'react';
 import { View, type ViewStyle } from 'react-native';
 import Animated, {
@@ -11,18 +11,28 @@ import Animated, {
 
 import { Colors, Shadow } from '@/constants/theme';
 
-const OTTO_SRC = require('@/assets/images/otto.png');
+const OTTO_IMAGES = {
+  rest: require('../../assets/otto/otto_neutral.png'),
+  happy: require('../../assets/otto/otto_happy.png'),
+  excited: require('../../assets/otto/otto_excited.png'),
+  listening: require('../../assets/otto/otto_listening.png'),
+  painting: require('../../assets/otto/otto_painting.png'),
+  sad: require('../../assets/otto/otto_gentle_sad.png'),
+  waving: require('../../assets/otto/otto_waving.png'),
+} satisfies Record<string, ImageSource>;
 
 type OttoProps = {
   size?: number;
   energy?: 'rest' | 'happy';
+  state?: keyof typeof OTTO_IMAGES;
   /** show a soft circular tile behind the mascot (the art itself is transparent) */
   disc?: boolean;
   style?: ViewStyle;
 };
 
-export function Otto({ size = 140, energy = 'rest', disc = false, style }: OttoProps) {
+export function Otto({ size = 140, energy = 'rest', state, disc = false, style }: OttoProps) {
   const bob = useSharedValue(0);
+  const imageState = state ?? energy;
 
   useEffect(() => {
     const amp = energy === 'happy' ? 5 : 3;
@@ -47,14 +57,21 @@ export function Otto({ size = 140, energy = 'rest', disc = false, style }: OttoP
       }
     : { width: size, height: size, alignItems: 'center', justifyContent: 'center' };
 
-  const imgInset = disc ? size * 0.1 : 0;
+  const imgInset = disc ? size * 0.08 : 0;
+  const imgSize = size - imgInset * 2;
+  const cropScale = imageState === 'painting' ? 1.32 : 1.24;
+  const cropOffset = imageState === 'painting' ? -imgSize * 0.14 : -imgSize * 0.12;
 
   return (
     <Animated.View style={[animStyle, style]}>
       <View style={discStyle}>
         <Image
-          source={OTTO_SRC}
-          style={{ width: size - imgInset * 2, height: size - imgInset * 2 }}
+          source={OTTO_IMAGES[imageState]}
+          style={{
+            width: imgSize * cropScale,
+            height: imgSize * cropScale,
+            transform: [{ translateY: cropOffset }],
+          }}
           contentFit="contain"
         />
       </View>
