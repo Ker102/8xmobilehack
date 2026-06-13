@@ -18,6 +18,8 @@ export function AttachmentStrip({
   actionLabel = 'Add photos',
   onAdd,
 }: AttachmentStripProps) {
+  const isSingleAttachment = attachments.length === 1;
+
   return (
     <View style={styles.wrap}>
       <View style={styles.head}>
@@ -39,13 +41,13 @@ export function AttachmentStrip({
         ) : null}
       </View>
 
-      <View style={styles.list}>
+      <View style={[styles.list, isSingleAttachment && styles.singleList]}>
         {attachments.map((item) => {
           const swatch = Swatch[item.swatch];
           const image = getDemoImage(item.imageKey);
           return (
-            <View key={item.id} style={[styles.item, Shadow.soft]}>
-              <View style={[styles.thumb, { backgroundColor: swatch.bg }]}>
+            <View key={item.id} style={[styles.item, isSingleAttachment && styles.singleItem, Shadow.soft]}>
+              <View style={[styles.thumb, image ? styles.imageThumb : { backgroundColor: swatch.bg }]}>
                 {image ? (
                   <Image source={image} style={styles.photo} resizeMode="contain" />
                 ) : (
@@ -67,10 +69,10 @@ const styles = StyleSheet.create({
   wrap: { alignSelf: 'stretch', gap: Spacing.two },
   head: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: Spacing.three },
   titleRow: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-  list: { flexDirection: 'row', gap: Spacing.two },
+  list: { flexDirection: 'row', flexWrap: 'wrap', gap: Spacing.two },
+  singleList: { alignSelf: 'flex-start' },
   item: {
-    flex: 1,
-    minWidth: 0,
+    width: 118,
     backgroundColor: Colors.light.surface,
     borderRadius: Radius.md,
     borderWidth: 1,
@@ -78,8 +80,9 @@ const styles = StyleSheet.create({
     padding: 7,
     gap: 6,
   },
+  singleItem: { width: 112 },
   thumb: {
-    height: 58,
+    height: 76,
     borderRadius: Radius.sm,
     alignItems: 'center',
     justifyContent: 'center',
@@ -87,5 +90,6 @@ const styles = StyleSheet.create({
     borderColor: Colors.light.borderSoft,
     overflow: 'hidden',
   },
-  photo: { width: '92%', height: '92%' },
+  imageThumb: { backgroundColor: Colors.light.background },
+  photo: { width: '100%', height: '100%' },
 });
