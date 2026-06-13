@@ -14,7 +14,6 @@ Start with a documentation-first repository baseline:
 
 - GitHub Actions for validation and security scanning.
 - Dependabot for dependency and Actions updates.
-- Cursor configuration for MCP tools, project rules, and skills.
 - Architecture and case-study docs that non-technical stakeholders can follow.
 
 ## Consequences

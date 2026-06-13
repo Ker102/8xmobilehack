@@ -15,7 +15,7 @@ For hackathon work, report vulnerabilities directly to the repository owner or m
 - Dependency Review checks pull requests for risky dependency changes.
 - Dependabot proposes updates for npm packages and GitHub Actions.
 - Gitleaks scans for committed secrets.
-- Cursor MCP configuration references secrets through environment variables.
+- Local IDE and agent configuration must remain outside the repository.
 
 ## Secret Handling
 

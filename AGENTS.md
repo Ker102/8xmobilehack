@@ -13,7 +13,7 @@ This repository is for a hackathon build that must stay presentation-ready.
 
 ## Expected Workflow
 
-1. Read `README.md`, `docs/ARCHITECTURE.md`, and the relevant `.cursor/rules/*.mdc` files.
+1. Read `README.md`, `docs/ARCHITECTURE.md`, and the relevant docs for the task.
 2. Make focused changes.
 3. Add or update tests and validation scripts for the changed behavior.
 4. Update the case study or architecture docs if the user-facing story changes.
@@ -22,6 +22,5 @@ This repository is for a hackathon build that must stay presentation-ready.
 ## Repository Boundaries
 
 - `.github/` owns CI, security scanning, and repository automation.
-- `.cursor/` owns Cursor IDE rules, MCP config, and project skills.
 - `docs/` owns architecture, product story, security, and decisions.
 - `scripts/` owns lightweight repository automation.

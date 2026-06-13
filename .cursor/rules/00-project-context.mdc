@@ -1,9 +1,0 @@
----
-alwaysApply: true
----
-
-# 8x Mobile Hackathon Context
-
-This repository must stay hackathon-demo ready. Keep explanations clear enough for non-technical judges, and keep implementation choices traceable in docs.
-
-When changing product behavior, update `docs/CASE_STUDY.md` or `docs/ARCHITECTURE.md` if the judge-facing story changes.

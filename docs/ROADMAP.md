@@ -4,7 +4,7 @@
 
 - Establish repository baseline.
 - Create judge-ready architecture and case-study docs.
-- Configure Cursor and GitHub automation.
+- Configure GitHub automation and repository release policy.
 
 ## Next
 
